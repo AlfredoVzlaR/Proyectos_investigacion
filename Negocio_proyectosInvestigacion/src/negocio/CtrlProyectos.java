@@ -8,8 +8,9 @@ import javax.swing.JOptionPane;
  *
  * @author germa
  */
-public class CtrlProyectos {
+public class CtrlProyectos implements IProyectos{
     
+    @Override
     public boolean verificarInformacion(String campoTexto){
         if(campoTexto.isEmpty()){
             JOptionPane.showMessageDialog(null, "Es necesario llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -19,7 +20,7 @@ public class CtrlProyectos {
         }     
     }
     
-    public Proyectos consultar(String campoTexto,int index)
+    public Proyectos consultarProyectos(String campoTexto,int index)
     {
         if(index==0){
             Proyectos proyecto = FabricaProyectos.getInstancia().ConsultarProyectos(campoTexto,index);

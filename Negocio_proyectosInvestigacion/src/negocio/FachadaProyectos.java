@@ -18,19 +18,19 @@ public class FachadaProyectos implements IProyectos{
     @Override
     public Proyectos consultarProyectos(String campoTexto,int index) {
         if(index==0){
-            return ctrl.consultar(campoTexto, index);
+            return ctrl.consultarProyectos(campoTexto, index);
         }
         else if(index==1){
-            return ctrl.consultar(campoTexto, index);
+            return ctrl.consultarProyectos(campoTexto, index);
         }
         else if(index==2){
-            return ctrl.consultar(campoTexto, index);
+            return ctrl.consultarProyectos(campoTexto, index);
         }
         else if(index==3){
-            return ctrl.consultar(campoTexto, index);
+            return ctrl.consultarProyectos(campoTexto, index);
         }
         else if(index==4){
-            return ctrl.consultar(campoTexto, index);
+            return ctrl.consultarProyectos(campoTexto, index);
         }
         return null;
     }
