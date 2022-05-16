@@ -24,7 +24,7 @@ public class CtrlProyectos implements IProyectos{
     
     @Override
     public List<Profesor> consultarTodosProfesores(){
-        return FabricaLogica.getInstancia().consultarTodosProfesores();
+        return FabricaProyectos.getInstanciaRep().consultarTodosProfesores();
     }
     
     public Proyectos consultarProyectos(String campoTexto, int index) {

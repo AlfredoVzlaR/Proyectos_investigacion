@@ -26,17 +26,15 @@ import negocio.FabricaLogica;
  * @author German
  */
 public class FrmRegistrarProyecto extends javax.swing.JFrame {
-    
-    DefaultListModel modeloProfesores = new DefaultListModel();
     Proyectos proyecto;
     ArrayList<Profesor> profesores;
-    
+    DefaultListModel modeloIntegrantes = new DefaultListModel();
     /**
      * Creates new form frmRegistrarProyecto
      */
     public FrmRegistrarProyecto() {
-        initComponents(); 
-        listaProfesores.setModel(modeloProfesores);
+        initComponents();
+        listaProfesores.setModel(modeloIntegrantes);
         consultarProfesores();
     }
     
@@ -77,7 +75,6 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         txtLineaInvestigacion = new javax.swing.JTextField();
         fechaInicio = new com.toedter.calendar.JDateChooser();
         fechaFinal = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         listaProfesores = new javax.swing.JList<>();
         jLabel13 = new javax.swing.JLabel();
@@ -174,6 +171,11 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaProfesores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProfesoresMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaProfesores);
 
         jLabel9.setText("Profesores");
@@ -190,8 +192,6 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         jLabel12.setPreferredSize(new java.awt.Dimension(189, 19));
 
         txtLineaInvestigacion.setEditable(false);
-
-        jButton1.setText("Agregar");
 
         listaProfesores.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {  };
@@ -258,8 +258,8 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
-                                .addGap(62, 62, 62))
+                                .addComponent(jLabel13)
+                                .addGap(270, 270, 270))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,10 +271,7 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel9)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jLabel13))))))
+                                            .addComponent(jLabel9)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel2)))
@@ -302,12 +299,12 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 59, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -343,20 +340,16 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel11))
                                 .addGap(0, 36, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(35, 35, 35))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel13))
+                        .addGap(215, 215, 215))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -397,7 +390,7 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         txtAcronimo.setText("");         
         txtPresupuesto.setText("");
         txtDescripcion.setText("");
-        modeloProfesores.clear();
+        modeloIntegrantes.clear();
         tablaLineas.clearSelection();
         tablaProfesores.clearSelection();
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -407,6 +400,12 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
          String linea = model.getValueAt(tablaLineas.getSelectedRow(), 0).toString();
          txtLineaInvestigacion.setText(linea);
     }//GEN-LAST:event_tablaLineasMouseClicked
+
+    private void tablaProfesoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProfesoresMouseClicked
+        int fila= tablaProfesores.getSelectedRow();
+        Profesor profesor = (Profesor) tablaProfesores.getValueAt(fila,0);
+        agregarProfesorLista(profesor);
+    }//GEN-LAST:event_tablaProfesoresMouseClicked
 
     public void consultarProfesores() {
         List<Profesor> listProfesores = FabricaLogica.getInstancia().consultarTodosProfesores();
@@ -427,26 +426,10 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
 
         Object rowData[] = new Object[1];
         for (int i = 0; i < list.size(); i++) {
-            rowData[0] = list.get(i).getNombre();
+            rowData[0] = list.get(i);
             model.addRow(rowData);
         }
-
-//        DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaProfesores.getModel();
-//        modeloTabla.setRowCount(0);
-//        Object[] fila = new Object[1];
-//        for(Profesor profesor: listProfesores){
-//            fila[0] = profesor.getId();
-//            modeloTabla.addRow(fila);
-//        }
     }
-        
-//        listaProfesores.forEach(profesor
-//                -> {
-//            Object[] fila = new Object[1];
-//            fila[0] = profesor.getId();
-//            modeloTabla.addRow(fila);
-//        });
-//                }
   
     public void llenarCombo(List<Profesor> profesores) {
         cbInvestigadorPrincipal.addItem(new Profesor());
@@ -457,12 +440,12 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
     }
     
     private boolean agregarProfesorLista(Profesor profesor){  
-        if(modeloProfesores.contains(profesor)){
+        if(modeloIntegrantes.contains(profesor)){
             JOptionPane.showMessageDialog(this, "El profesor seleccionado ya se encuentra dentro de la lista");
             return false;
         }       
         
-        modeloProfesores.addElement(profesor);
+        modeloIntegrantes.addElement(profesor);
         profesores.add(profesor);
         
         return true;
@@ -511,7 +494,6 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
     private javax.swing.JComboBox<Profesor> cbInvestigadorPrincipal;
     private com.toedter.calendar.JDateChooser fechaFinal;
     private com.toedter.calendar.JDateChooser fechaInicio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
