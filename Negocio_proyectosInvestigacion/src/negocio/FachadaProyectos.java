@@ -1,6 +1,9 @@
 package negocio;
 
+import dominio.Profesor;
 import dominio.Proyectos;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -11,8 +14,8 @@ public class FachadaProyectos implements IProyectos{
     CtrlProyectos ctrl = new CtrlProyectos();
     
     @Override
-    public boolean verificarInformacion(String campoTexto) {
-        return ctrl.verificarInformacion(campoTexto) != false;
+    public boolean verificarInformacionBuscar(String campoTexto) {
+        return ctrl.verificarInformacionBuscar(campoTexto) != false;
     }
 
     @Override
@@ -33,6 +36,21 @@ public class FachadaProyectos implements IProyectos{
             return ctrl.consultarProyectos(campoTexto, index);
         }
         return null;
+    }
+
+    @Override
+    public boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion) {
+        return ctrl.verificarInformacionRegistrar(programa, linea, nombre, acronimo, fechaInicio, fechaFinal, presupuesto, descripcion);
+    }
+
+    @Override
+    public boolean registrarProyecto(Proyectos proyecto) {
+        return ctrl.registrarProyecto(proyecto);
+    }
+
+    @Override
+    public List<Profesor> consultarTodosProfesores() {
+        return ctrl.consultarTodosProfesores();
     }
     
 }

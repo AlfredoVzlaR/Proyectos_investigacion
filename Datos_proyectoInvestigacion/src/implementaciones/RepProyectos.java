@@ -6,6 +6,7 @@ package implementaciones;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dominio.Profesor;
 import dominio.Proyectos;
 import interfaces.IConexionBD;
 import interfaces.IRepProyectos;
@@ -30,33 +31,37 @@ public class RepProyectos implements IRepProyectos {
     private MongoCollection getCollection() {
         return this.baseDatos.getCollection("proyectos", Proyectos.class);
     }
+    
+    private MongoCollection <Profesor>getCollectionProfesores() {
+        return this.baseDatos.getCollection("profesores", Profesor.class);
+    }
 
+    @Override
+    public List<Profesor> consultarTodosProfesores(){
+        MongoCollection <Profesor> coleccion = this.getCollectionProfesores();
+        List<Profesor> listProfesores = new LinkedList();
+        coleccion.find().into(listProfesores);
+        return listProfesores;
+    }
+    
     @Override
     public Proyectos consultarProyecto(String parametro, int index) {
         try {
-            if (index == 0) {
-                MongoCollection<Proyectos> coleccion = this.getCollection();
-                List<Proyectos> lista = new LinkedList<>();
+            MongoCollection<Proyectos> coleccion = this.getCollection();
+            List<Proyectos> lista = new LinkedList<>();
+            if (index == 0) {                
                 coleccion.find(new Document().append("codigo", new Document().append("$eq", parametro))).into(lista);
                 return lista.get(0);
-            } else if (index == 1) {
-                MongoCollection<Proyectos> coleccion = this.getCollection();
-                List<Proyectos> lista = new LinkedList<>();
+            } else if (index == 1) {                
                 coleccion.find(new Document().append("nombre", new Document().append("$eq", parametro))).into(lista);
                 return lista.get(0);
-            } else if (index == 2) {
-                MongoCollection<Proyectos> coleccion = this.getCollection();
-                List<Proyectos> lista = new LinkedList<>();
+            } else if (index == 2) {                
                 coleccion.find(new Document().append("acronimo", new Document().append("$eq", parametro))).into(lista);
                 return lista.get(0);
-            } else if (index == 3) {
-                MongoCollection<Proyectos> coleccion = this.getCollection();
-                List<Proyectos> lista = new LinkedList<>();
+            } else if (index == 3) {                
                 coleccion.find(new Document().append("programaInvestigacion", new Document().append("$eq", parametro))).into(lista);
                 return lista.get(0);
-            } else if (index == 4) {
-                MongoCollection<Proyectos> coleccion = this.getCollection();
-                List<Proyectos> lista = new LinkedList<>();
+            } else if (index == 4) {                
                 coleccion.find(new Document().append("desarrolloFinancia", new Document().append("$eq", parametro))).into(lista);
                 return lista.get(0);
             }
@@ -64,5 +69,12 @@ public class RepProyectos implements IRepProyectos {
             System.err.print(e);
         }
         return null;
+    }
+
+    @Override
+    public boolean RegistrarProyecto(Proyectos proyecto) {
+        MongoCollection<Proyectos> coleccion = this.getCollection();
+        coleccion.insertOne(proyecto);
+        return true;
     }
 }

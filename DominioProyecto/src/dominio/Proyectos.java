@@ -21,12 +21,14 @@ public class Proyectos {
     private Date fechaInicio;
     private Date fechaFinalizacion;
     private String descripcionObjetivos;
+    private String lineaInvestigacion;
+    private Doctor investigadorPrincipal;
     private List<Profesor> profesores;
 
     public Proyectos() {
     }
 
-    public Proyectos(String codigo, String nombre, String acronimo, double presupuesto, String programaInvestigacion, String desarrolloFinancia, Date fechaInicio, Date fechaFinalizacion, String descripcionObjetivos, List<Profesor> profesores) {
+    public Proyectos(String codigo, String nombre, String acronimo, double presupuesto, String programaInvestigacion, String desarrolloFinancia, Date fechaInicio, Date fechaFinalizacion, String descripcionObjetivos, List<Profesor> profesores, String lineaInvestigacion, Doctor investigadorPrincipal) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.acronimo = acronimo;
@@ -37,6 +39,8 @@ public class Proyectos {
         this.fechaFinalizacion = fechaFinalizacion;
         this.descripcionObjetivos = descripcionObjetivos;
         this.profesores = profesores;
+        this.lineaInvestigacion = lineaInvestigacion;
+        this.investigadorPrincipal = investigadorPrincipal;
     }
 
     public Proyectos(ObjectId id, String codigo, String nombre, String acronimo, double presupuesto, String programaInvestigacion, String desarrolloFinancia, Date fechaInicio, Date fechaFinalizacion, String descripcionObjetivos, List<Profesor> profesores) {
@@ -141,6 +145,22 @@ public class Proyectos {
 
     public void setProfesores(List<Profesor> profesores) {
         this.profesores = profesores;
+    }
+
+    public String getLineaInvestigacion() {
+        return lineaInvestigacion;
+    }
+
+    public void setLineaInvestigacion(String lineaInvestigacion) {
+        this.lineaInvestigacion = lineaInvestigacion;
+    }        
+
+    public Doctor getInvestigadorPrincipal() {
+        return investigadorPrincipal;
+    }
+
+    public void setInvestigadorPrincipal(Doctor investigadorPrincipal) {
+        this.investigadorPrincipal = investigadorPrincipal;
     }
 
     @Override

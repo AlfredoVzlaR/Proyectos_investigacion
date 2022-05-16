@@ -67,7 +67,7 @@ public class frmBuscar extends javax.swing.JFrame {
     }
     private boolean mostrarError()
     {
-        if(FabricaLogica.getInstancia().verificarInformacion(txtBusqueda.getText())){
+        if(FabricaLogica.getInstancia().verificarInformacionBuscar(txtBusqueda.getText())){
             return true;
         }
         return false;
@@ -260,6 +260,7 @@ public class frmBuscar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed

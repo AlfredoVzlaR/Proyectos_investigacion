@@ -29,6 +29,7 @@ public class frmInicial extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         buscarProyecto = new javax.swing.JMenuItem();
+        registrarProyectos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -44,6 +45,14 @@ public class frmInicial extends javax.swing.JFrame {
             }
         });
         jMenu1.add(buscarProyecto);
+
+        registrarProyectos.setText("Registrar proyectos");
+        registrarProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarProyectosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(registrarProyectos);
         jMenu1.add(jSeparator1);
 
         jMenuItem2.setText("Salir");
@@ -71,6 +80,12 @@ public class frmInicial extends javax.swing.JFrame {
     private void buscarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProyectoActionPerformed
         frmBuscar.abrirBuscarProyecto();
     }//GEN-LAST:event_buscarProyectoActionPerformed
+
+    private void registrarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProyectosActionPerformed
+        FrmRegistrarProyecto rp = new FrmRegistrarProyecto();
+        rp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_registrarProyectosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,5 +143,6 @@ public class frmInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem registrarProyectos;
     // End of variables declaration//GEN-END:variables
 }

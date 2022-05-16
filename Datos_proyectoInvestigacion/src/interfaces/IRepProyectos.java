@@ -4,7 +4,9 @@
  */
 package interfaces;
 
+import dominio.Profesor;
 import dominio.Proyectos;
+import java.util.List;
 
 /**
  *
@@ -12,4 +14,6 @@ import dominio.Proyectos;
  */
 public interface IRepProyectos {
     Proyectos consultarProyecto(String parametro, int index);
+    List<Profesor> consultarTodosProfesores();
+    boolean RegistrarProyecto(Proyectos proyecto);
 }

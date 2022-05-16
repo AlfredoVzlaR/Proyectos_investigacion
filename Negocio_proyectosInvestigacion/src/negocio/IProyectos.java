@@ -1,6 +1,9 @@
 package negocio;
 
+import dominio.Profesor;
 import dominio.Proyectos;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -8,6 +11,9 @@ import dominio.Proyectos;
  */
 public interface IProyectos {
     
-    boolean verificarInformacion(String campoTexto);
+    boolean verificarInformacionBuscar(String campoTexto);
+    boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion);
     Proyectos consultarProyectos(String campoTexto,int index);
+    List<Profesor> consultarTodosProfesores();
+    boolean registrarProyecto(Proyectos proyecto);
 }
