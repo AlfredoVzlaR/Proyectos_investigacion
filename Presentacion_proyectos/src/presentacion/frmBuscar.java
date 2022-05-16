@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dominio.Profesor;
 import dominio.Proyectos;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -51,6 +52,18 @@ public class frmBuscar extends javax.swing.JFrame {
             fila[5] = proyecto.getFechaInicio();
             fila[6] = proyecto.getFechaFinalizacion();
             modeloTabla.addRow(fila);
+        DefaultTableModel modeloTablaProfesores = (DefaultTableModel) this.tbProfesores.getModel();
+        
+        
+        proyecto.getProfesores().forEach(profesor
+                -> {
+            Object[] filaProfesor = new Object[4];
+            filaProfesor[0] = profesor.getNombre();
+            filaProfesor[1] = profesor.getApellido();
+            filaProfesor[2] = profesor.getDespacho();
+            filaProfesor[3] = profesor.getTelefono() ;
+            modeloTablaProfesores.addRow(filaProfesor);
+        });
     }
     private boolean mostrarError()
     {
@@ -94,7 +107,7 @@ public class frmBuscar extends javax.swing.JFrame {
         botonBuscar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbProfesores = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,7 +165,7 @@ public class frmBuscar extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel4.setText("Proyecto.");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbProfesores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -175,12 +188,12 @@ public class frmBuscar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane2.setViewportView(tbProfesores);
+        if (tbProfesores.getColumnModel().getColumnCount() > 0) {
+            tbProfesores.getColumnModel().getColumn(0).setResizable(false);
+            tbProfesores.getColumnModel().getColumn(1).setResizable(false);
+            tbProfesores.getColumnModel().getColumn(2).setResizable(false);
+            tbProfesores.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
@@ -299,8 +312,8 @@ public class frmBuscar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JTable tbProfesores;
     private javax.swing.JTable tbProyectos;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
