@@ -1,5 +1,8 @@
 package negocio;
 
+import dominio.Doctor;
+import dominio.LineaInvestigacion;
+import dominio.NoDoctor;
 import dominio.Profesor;
 import dominio.Proyectos;
 import java.util.Date;
@@ -39,8 +42,8 @@ public class FachadaProyectos implements IProyectos{
     }
 
     @Override
-    public boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion) {
-        return ctrl.verificarInformacionRegistrar(programa, linea, nombre, acronimo, fechaInicio, fechaFinal, presupuesto, descripcion);
+    public boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion, int index, List<Profesor> profesoresParticipantes) {
+        return ctrl.verificarInformacionRegistrar(programa, linea, nombre, acronimo, fechaInicio, fechaFinal, presupuesto, descripcion, index, profesoresParticipantes);
     }
 
     @Override
@@ -48,9 +51,26 @@ public class FachadaProyectos implements IProyectos{
         return ctrl.registrarProyecto(proyecto);
     }
 
+//    @Override
+//    public List<Profesor> consultarTodosProfesores() {
+//        return ctrl.consultarTodosProfesores();
+//    }
+    
     @Override
-    public List<Profesor> consultarTodosProfesores() {
-        return ctrl.consultarTodosProfesores();
+    public List<Doctor> consultarDoctores() {
+        return ctrl.consultarDoctores();
+    }   
+    
+
+    @Override
+    public List<LineaInvestigacion> consultarLineasInvestigacion() {
+        return ctrl.consultarLineasInvestigacion();
     }
+
+    @Override
+    public List<NoDoctor> consultarNoDoctores() {
+        return ctrl.consultarNoDoctores();
+    }
+
     
 }

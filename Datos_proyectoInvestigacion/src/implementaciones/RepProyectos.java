@@ -6,6 +6,9 @@ package implementaciones;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dominio.Doctor;
+import dominio.LineaInvestigacion;
+import dominio.NoDoctor;
 import dominio.Profesor;
 import dominio.Proyectos;
 import interfaces.IConexionBD;
@@ -32,16 +35,36 @@ public class RepProyectos implements IRepProyectos {
         return this.baseDatos.getCollection("proyectos", Proyectos.class);
     }
     
-    private MongoCollection <Profesor>getCollectionProfesores() {
-        return this.baseDatos.getCollection("profesores", Profesor.class);
+//    private MongoCollection <Profesor>getCollectionProfesores() {
+//        return this.baseDatos.getCollection("profesores", Profesor.class);
+//    }
+    
+    private MongoCollection <LineaInvestigacion>getCollectionLineasInvestigacion() {
+        return this.baseDatos.getCollection("lineainvestigacion", LineaInvestigacion.class);
+    }
+    
+    private MongoCollection <Doctor>getCollectionDoctores() {
+        return this.baseDatos.getCollection("doctor", Doctor.class);
+    }
+    
+    private MongoCollection <NoDoctor>getCollectionNoDoctores() {
+        return this.baseDatos.getCollection("nodoctor", NoDoctor.class);
     }
 
-    @Override
-    public List<Profesor> consultarTodosProfesores(){
-        MongoCollection <Profesor> coleccion = this.getCollectionProfesores();
-        List<Profesor> listProfesores = new LinkedList();
-        coleccion.find().into(listProfesores);
-        return listProfesores;
+//    @Override
+//    public List<Profesor> consultarTodosProfesores(){
+//        MongoCollection <Profesor> coleccion = this.getCollectionProfesores();
+//        List<Profesor> listProfesores = new LinkedList();
+//        coleccion.find().into(listProfesores);
+//        return listProfesores;
+//    }
+    
+        @Override
+    public List<Doctor> consultarDoctores(){
+        MongoCollection <Doctor> coleccion = this.getCollectionDoctores();
+        List<Doctor> listDoctores = new LinkedList();
+        coleccion.find().into(listDoctores);
+        return listDoctores;
     }
     
     @Override
@@ -76,5 +99,21 @@ public class RepProyectos implements IRepProyectos {
         MongoCollection<Proyectos> coleccion = this.getCollection();
         coleccion.insertOne(proyecto);
         return true;
+    }
+
+    @Override
+    public List<LineaInvestigacion> consultarLineasInvestigacion() {
+        MongoCollection <LineaInvestigacion> coleccion = this.getCollectionLineasInvestigacion();
+        List<LineaInvestigacion> listLineas = new LinkedList();
+        coleccion.find().into(listLineas);
+        return listLineas;
+    }
+
+    @Override
+    public List<NoDoctor> consultarNoDoctores() {
+        MongoCollection <NoDoctor> coleccion = this.getCollectionNoDoctores();
+        List<NoDoctor> listNoDoctores = new LinkedList();
+        coleccion.find().into(listNoDoctores);
+        return listNoDoctores;
     }
 }

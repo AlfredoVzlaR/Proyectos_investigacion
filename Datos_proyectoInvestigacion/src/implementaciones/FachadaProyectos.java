@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package implementaciones;
+import dominio.LineaInvestigacion;
+import dominio.Profesor;
 import interfaces.IProyectos;
 import dominio.Proyectos;
 import interfaces.IConexionBD;
 import interfaces.IRepProyectos;
+import java.util.List;
 
 
 /**

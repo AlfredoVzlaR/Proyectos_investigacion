@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import dominio.Doctor;
+import dominio.LineaInvestigacion;
+import dominio.NoDoctor;
 import dominio.Profesor;
 import dominio.Proyectos;
 import java.util.ArrayList;
@@ -28,14 +30,18 @@ import negocio.FabricaLogica;
 public class FrmRegistrarProyecto extends javax.swing.JFrame {
     Proyectos proyecto;
     ArrayList<Profesor> profesores;
+    List<Profesor> profesoresParticipantes;
     DefaultListModel modeloIntegrantes = new DefaultListModel();
     /**
      * Creates new form frmRegistrarProyecto
      */
     public FrmRegistrarProyecto() {
         initComponents();
+        profesoresParticipantes = new ArrayList();
         listaProfesores.setModel(modeloIntegrantes);
+        cbInvestigadorPrincipal.addItem(new Profesor("Seleccione un doctor","","",""));
         consultarProfesores();
+        consultarLineasInvestigacion();
     }
     
     /**
@@ -299,12 +305,11 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,7 +344,7 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                                     .addComponent(txtPresupuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel11))
-                                .addGap(0, 36, Short.MAX_VALUE)))
+                                .addGap(0, 42, Short.MAX_VALUE)))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -350,7 +355,6 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
@@ -363,7 +367,7 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if(FabricaLogica.getInstancia().verificarInformacionRegistrar(txtPrograma.getText(), txtLineaInvestigacion.getText(), txtNombreProyecto.getText(), txtAcronimo.getText(), fechaInicio.getDate(), fechaFinal.getDate(), Float.parseFloat(txtPresupuesto.getText()), txtDescripcion.getText())){
+        if(FabricaLogica.getInstancia().verificarInformacionRegistrar(txtPrograma.getText(), txtLineaInvestigacion.getText(), txtNombreProyecto.getText(), txtAcronimo.getText(), fechaInicio.getDate(), fechaFinal.getDate(), Float.parseFloat(txtPresupuesto.getText()), txtDescripcion.getText(), cbInvestigadorPrincipal.getSelectedIndex(), profesoresParticipantes)){
             proyecto = new Proyectos();
             proyecto.setProgramaInvestigacion(txtPrograma.getText());
             proyecto.setLineaInvestigacion(txtLineaInvestigacion.getText());
@@ -373,8 +377,12 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
             proyecto.setFechaInicio(fechaInicio.getDate());
             proyecto.setFechaFinalizacion(fechaFinal.getDate());
             proyecto.setPresupuesto(Float.parseFloat(txtPresupuesto.getText()));
+            
             proyecto.setInvestigadorPrincipal((Doctor) cbInvestigadorPrincipal.getSelectedItem());
             proyecto.setProfesores(profesores);
+            proyecto.setProfesores(profesoresParticipantes);
+            FabricaLogica.getInstancia().registrarProyecto(proyecto);                                            
+            
         }        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -390,6 +398,8 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         txtAcronimo.setText("");         
         txtPresupuesto.setText("");
         txtDescripcion.setText("");
+        txtLineaInvestigacion.setText("");
+        cbInvestigadorPrincipal.setSelectedIndex(0);
         modeloIntegrantes.clear();
         tablaLineas.clearSelection();
         tablaProfesores.clearSelection();
@@ -405,16 +415,19 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         int fila= tablaProfesores.getSelectedRow();
         Profesor profesor = (Profesor) tablaProfesores.getValueAt(fila,0);
         agregarProfesorLista(profesor);
+        profesoresParticipantes.add(profesor);
     }//GEN-LAST:event_tablaProfesoresMouseClicked
 
-    public void consultarProfesores() {
-        List<Profesor> listProfesores = FabricaLogica.getInstancia().consultarTodosProfesores();
-
-        llenarCombo(listProfesores);
+    private void consultarProfesores() {
+        List<Doctor> listDoctores = FabricaLogica.getInstancia().consultarDoctores();
+        List<NoDoctor> listNoDoctores = FabricaLogica.getInstancia().consultarNoDoctores();
+        
+        llenarCombo(listDoctores);
 
         List<Profesor> list = new ArrayList();
 
-        list.addAll(listProfesores);
+        list.addAll(listDoctores);
+        list.addAll(listNoDoctores);
 
         DefaultTableModel model = (DefaultTableModel) tablaProfesores.getModel();
         int rowCount = model.getRowCount();
@@ -431,15 +444,39 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         }
     }
   
-    public void llenarCombo(List<Profesor> profesores) {
-        cbInvestigadorPrincipal.addItem(new Profesor());
+    private void llenarCombo(List<Doctor> doctores) {
+        
+        //cbInvestigadorPrincipal.addItem(new Doctor());
 
-        for (Profesor profesor : profesores) {
-            cbInvestigadorPrincipal.addItem(profesor);
+        for (Doctor doctor : doctores) {
+            cbInvestigadorPrincipal.addItem(doctor);
+        }
+    }
+    
+    private void consultarLineasInvestigacion(){
+        List<LineaInvestigacion> listLineas = FabricaLogica.getInstancia().consultarLineasInvestigacion();
+
+        List<LineaInvestigacion> list = new ArrayList();
+
+        list.addAll(listLineas);
+
+        DefaultTableModel model = (DefaultTableModel) tablaLineas.getModel();
+        int rowCount = model.getRowCount();
+
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+
+        Object rowData[] = new Object[1];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i);
+            model.addRow(rowData);
         }
     }
     
     private boolean agregarProfesorLista(Profesor profesor){  
+        try{
         if(modeloIntegrantes.contains(profesor)){
             JOptionPane.showMessageDialog(this, "El profesor seleccionado ya se encuentra dentro de la lista");
             return false;
@@ -448,6 +485,10 @@ public class FrmRegistrarProyecto extends javax.swing.JFrame {
         modeloIntegrantes.addElement(profesor);
         profesores.add(profesor);
         
+        return true;
+        }catch(Exception e){
+            
+        }
         return true;
     }
     

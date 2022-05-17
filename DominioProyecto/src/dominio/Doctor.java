@@ -9,19 +9,16 @@ import org.bson.types.ObjectId;
  */
 public class Doctor extends Profesor {
 
-    private List<ObjectId> proyectosIds;
 
     public Doctor() {
     }
 
-    public Doctor(List<ObjectId> proyectosIds, String nombre, String apellido, String despacho, String telefono) {
+    public Doctor(String nombre, String apellido, String despacho, String telefono) {
         super(nombre, apellido, despacho, telefono);
-        this.proyectosIds = proyectosIds;
     }
 
     public Doctor(List<ObjectId> proyectosIds, ObjectId id, String nombre, String apellido, String despacho, String telefono) {
         super(id, nombre, apellido, despacho, telefono);
-        this.proyectosIds = proyectosIds;
     }
 
     @Override
@@ -64,17 +61,11 @@ public class Doctor extends Profesor {
         this.telefono = telefono;
     }
 
-    public List<ObjectId> getProyectosIds() {
-        return proyectosIds;
-    }
 
-    public void setProyectosIds(List<ObjectId> proyectosIds) {
-        this.proyectosIds = proyectosIds;
-    }
 
     @Override
     public String toString() {
-        return "Doctor{" + "proyectosIds=" + proyectosIds + '}';
+        return "Dr: " + nombre + " " + apellido;
     }
 
 }

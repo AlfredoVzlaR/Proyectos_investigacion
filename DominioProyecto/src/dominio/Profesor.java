@@ -98,7 +98,7 @@ public class Profesor {
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + " "+ apellido;
     }
 
    
