@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FachadaProyectos implements IProyectos{
 
-    CtrlProyectos ctrl = new CtrlProyectos();
+    CtrlBuscar ctrl = new CtrlBuscar();
     CtrlRegistrar ctrlRegistrar = new CtrlRegistrar();
     
     @Override

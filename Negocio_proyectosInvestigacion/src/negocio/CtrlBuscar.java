@@ -1,12 +1,8 @@
 package negocio;
 
-import dominio.Doctor;
 import dominio.LineaInvestigacion;
-import dominio.NoDoctor;
-import dominio.Profesor;
 import implementaciones.FabricaProyectos;
 import dominio.Proyectos;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -14,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author germa
  */
-public class CtrlProyectos{
+public class CtrlBuscar{
     
     public boolean verificarInformacionBuscar(String campoTexto){
         if (campoTexto.isEmpty()) {
