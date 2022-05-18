@@ -19,6 +19,6 @@ public class FabricaProyectos {
         return new FachadaProyectos();
     }
     public static IRepProyectos getInstanciaRep(){
-        return new RepProyectos(new ConexionBD());
+        return new RepProyectos(ConexionBD.getConexionBD());
     }
 }
