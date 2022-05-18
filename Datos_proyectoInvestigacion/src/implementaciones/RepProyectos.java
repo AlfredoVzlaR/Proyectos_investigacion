@@ -40,7 +40,7 @@ public class RepProyectos implements IRepProyectos {
 //    }
     
     private MongoCollection <LineaInvestigacion>getCollectionLineasInvestigacion() {
-        return this.baseDatos.getCollection("lineainvestigacion", LineaInvestigacion.class);
+        return this.baseDatos.getCollection("lineasInvestigacion", LineaInvestigacion.class);
     }
     
     private MongoCollection <Doctor>getCollectionDoctores() {

@@ -24,18 +24,6 @@ public class CtrlProyectos{
         return true;
     }
     
-    public List<Doctor> consultarDoctores(){
-        return FabricaProyectos.getInstanciaRep().consultarDoctores();
-    }
-    
-    public List<NoDoctor> consultarNoDoctores(){
-        return FabricaProyectos.getInstanciaRep().consultarNoDoctores();
-    }
-    
-//    public List<Doctor> consultarDoctores(){
-//        return FabricaProyectos.getInstanciaRep().;
-//    }
-    
     public List<LineaInvestigacion> consultarLineasInvestigacion(){
         return FabricaProyectos.getInstanciaRep().consultarLineasInvestigacion();
     }
@@ -79,31 +67,4 @@ public class CtrlProyectos{
         }
         return null;
     }
-
-    public boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion, int index, List<Profesor> profesoresParticipantes) {
-        if(programa.isEmpty() || linea.isEmpty() || nombre.isEmpty() || acronimo.isEmpty() || fechaInicio == null || fechaFinal == null || presupuesto <= 0 || descripcion.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Es necesario llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if(index == 0){
-            JOptionPane.showMessageDialog(null, "Seleccione un doctor", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if(profesoresParticipantes.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Seleccione profesores/doctores", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    public boolean registrarProyecto(Proyectos proyecto) {
-        if(FabricaProyectos.getInstanciaRep().RegistrarProyecto(proyecto)){
-            JOptionPane.showMessageDialog(null, "El proyecto se ha agregado con éxito", "Proyecto", JOptionPane.INFORMATION_MESSAGE);
-            return true;
-        }
-        JOptionPane.showMessageDialog(null, "No fue posible agregar el proyecto", "Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    
 }

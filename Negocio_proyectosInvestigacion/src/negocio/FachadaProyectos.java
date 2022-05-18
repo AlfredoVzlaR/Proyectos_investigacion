@@ -15,6 +15,7 @@ import java.util.List;
 public class FachadaProyectos implements IProyectos{
 
     CtrlProyectos ctrl = new CtrlProyectos();
+    CtrlRegistrar ctrlRegistrar = new CtrlRegistrar();
     
     @Override
     public boolean verificarInformacionBuscar(String campoTexto) {
@@ -43,12 +44,12 @@ public class FachadaProyectos implements IProyectos{
 
     @Override
     public boolean verificarInformacionRegistrar(String programa, String linea, String nombre, String acronimo, Date fechaInicio, Date fechaFinal, float presupuesto, String descripcion, int index, List<Profesor> profesoresParticipantes) {
-        return ctrl.verificarInformacionRegistrar(programa, linea, nombre, acronimo, fechaInicio, fechaFinal, presupuesto, descripcion, index, profesoresParticipantes);
+        return ctrlRegistrar.verificarInformacionRegistrar(programa, linea, nombre, acronimo, fechaInicio, fechaFinal, presupuesto, descripcion, index, profesoresParticipantes);
     }
 
     @Override
     public boolean registrarProyecto(Proyectos proyecto) {
-        return ctrl.registrarProyecto(proyecto);
+        return ctrlRegistrar.registrarProyecto(proyecto);
     }
 
 //    @Override
@@ -58,18 +59,18 @@ public class FachadaProyectos implements IProyectos{
     
     @Override
     public List<Doctor> consultarDoctores() {
-        return ctrl.consultarDoctores();
+        return ctrlRegistrar.consultarDoctores();
     }   
     
 
     @Override
     public List<LineaInvestigacion> consultarLineasInvestigacion() {
-        return ctrl.consultarLineasInvestigacion();
+        return ctrlRegistrar.consultarLineasInvestigacion();
     }
 
     @Override
     public List<NoDoctor> consultarNoDoctores() {
-        return ctrl.consultarNoDoctores();
+        return ctrlRegistrar.consultarNoDoctores();
     }
 
     
